@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "short_name": "__MSG_extensionNameShort__",
+  "version": "0.1",
+  "author": "Jean Laroche",
+
+  "description": "__MSG_extensionDescription__",
+  "homepage_url": "https://github.com/jeanlaroche/AddAccentsExtension",
+
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true
+  },
+
+  "background": {
+    "page": "background/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "all_frames": true,
+      "match_about_blank": true,
+      "js": ["content_scripts/insert_accents.js"]
+    }
+  ],
+
+  "content_security_policy": "default-src 'self'",
+  "default_locale": "en",
+
+  "permissions": [
+    "storage",
+    "<all_urls>",
+    "tabs",
+    "compose",
+    "menus"
+  ],
+
+  "applications": {
+    "gecko": {
+      "id": "addAccent@jeanlaroche.github.io",
+      "strict_min_version": "87.0"
+    }
+  }
+}

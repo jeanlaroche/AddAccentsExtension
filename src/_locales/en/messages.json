@@ -1,0 +1,316 @@
+{
+  // manifest.json
+  "extensionName": {
+    "message": "Addaccent – Insert accents",
+    "description": "Name of the extension."
+  },
+  "extensionNameShort": {
+    "message": "Addaccent",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Allows you to quickly insert accents as you type.",
+    "description": "Description of the extension."
+  },
+
+  // errors or other messages (mostly for settings)
+  "errorShowingMessage": {
+    "message": "Could not show this message.",
+    "description": "When there is an error when showing the error/info/…."
+  },
+  "couldNotLoadOptions": {
+    "message": "Could not load settings.",
+    "description": "When one or all settings could not be loaded."
+  },
+  "couldNotSaveOption": {
+    "message": "Could not save this setting.",
+    "description": "When a setting could not be saved."
+  },
+  "messageUndoButton": {
+    "message": "Undo",
+    "description": "The text of a button that undoes the last action."
+  },
+  "couldNotUndoAction": {
+    "message": "Could not undo action.",
+    "description": "Shown when an action cannot be undone."
+  },
+  "resettingOptionsWorked": {
+    "message": "All settings are now back to defaults again!",
+    "description": "The message shown, when the options of the settings were reset."
+  },
+  "resettingOptionsFailed": {
+    "message": "Could not reset options!",
+    "description": "The message shown, when the options of the settings could not have been reset."
+  },
+
+  // tips
+  "tipYouLikeAddon": {
+    "message": "You like this add-on?",
+    "description": "A tip shown to remind the user to rate the addon."
+  },
+  "tipYouLikeAddonButton": {
+    "message": "Rate it",
+    "description": "Button for the tip shown to remind the user to rate the addon."
+  },
+  "tipAwesomeIcons": {
+    "message": "Also want emoji autocompletion? We have another add-on for that…",
+    "description": "A tip shown to let the user know of another suggested addon."
+  },
+  "tipAwesomeIconsButton": {
+    "message": "Try it",
+    "description": "Button for the tip shown to let the user know of another suggested addon."
+  },
+  "tipLearnMore": {
+    "message": "Learn more",
+    "description": "The common button for tips, where you can get more information on click."
+  },
+
+  // context menu
+  "menuReadableTextWrapper": {
+    "message": "$READABLE_TEXT$ – $TRANSFORMED_EXAMPLE$",
+    "description": "The wrapper that is enabled if you enable the showReadableText option to also show the text without transformation. Usually does not need to be translated.",
+    "placeholders": {
+      "readable_text": {
+        "content": "$1",
+        "example": "Superscript"
+      },
+      "transformed_example": {
+        "content": "$2",
+        "example": "ˢᵘᵖᵉʳˢᶜʳⁱᵖᵗ"
+      }
+    }
+  },
+
+  "menuCaseLowercase": {
+    "message": "Lowercase",
+    "description": "An entry in the context menu. This is an entry for the case."
+  },
+  "menuCaseUppercase": {
+    "message": "Uppercase",
+    "description": "An entry in the context menu. This is an entry for the case."
+  },
+  "menuCaseCapitalizeEachWord": {
+    "message": "Capitalize Each Word",
+    "description": "An entry in the context menu. This is an entry for the case."
+  },
+  "menuCaseToggleCase": {
+    "message": "Toggle Case",
+    "description": "An entry in the context menu. This is an entry for the case."
+  },
+
+  "menuFontSuperscript": {
+    "message": "Superscript",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontSmallCaps": {
+    "message": "Small Caps",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontAllSmallCaps": {
+    "message": "All Small Caps",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontUnicase": {
+    "message": "Unicase",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontSerifBold": {
+    "message": "Serif bold",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontSerifItalic": {
+    "message": "Serif italic",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontSerifBoldItalic": {
+    "message": "Serif bold italic",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontSansSerif": {
+    "message": "Sans-serif",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontSansSerifBold": {
+    "message": "Sans-serif bold",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontSansSerifItalic": {
+    "message": "Sans-serif italic",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontSansSerifBoldItalic": {
+    "message": "Sans-serif bold italic",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontScript": {
+    "message": "Script",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontScriptBold": {
+    "message": "Script bold",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontScriptFraktur": {
+    "message": "Fraktur",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontFrakturBold": {
+    "message": "Fraktur bold",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontMonospace": {
+    "message": "Monospace",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontDoubleStruck": {
+    "message": "Double-struck",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontCircled": {
+    "message": "Circled",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontCircledBlack": {
+    "message": "Circled (black)",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontSquared": {
+    "message": "Squared",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontSquaredBlack": {
+    "message": "Squared (black)",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+  "menuFontFullwidth": {
+    "message": "Fullwidth",
+    "description": "An entry in the context menu. This is an entry for the Unicode font."
+  },
+
+  // options
+  "someSettingsAreManaged": {
+    "message": "Some settings are managed by your system administrator and cannot be changed.",
+    "description": "The message, which appears, when settings are pre-defined (as managed options) by administrators."
+  },
+  "optionIsDisabledBecauseManaged": {
+    "message": "This option is disabled, because it has been configured by your system administrator.",
+    "description": "The title (tooltip) shown, when hovering over a disabled, managed option."
+  },
+  "optionLearnMore": {
+    "message": "Learn more",
+    "description": "When a link to an explainer needs to be added, this is the link text."
+  },
+  "optionsResetButton": {
+    "message": "Reset all settings to defaults",
+    "description": "The button to delete all current settings and load the defaults, shown in the add-on settings."
+  },
+
+  "titleAddAccents": {
+    "message": "Add Accents Configuration",
+    "description": "A title in the add-on settings."
+  },
+  "optionHelperTextInsertaccention": {
+    "message": "Here's where you configure accent insertion. Select the trigger character, and the mapping. If your trigger character is \\ and the mapping has e:é, typing e followed by \\ will insert é. Change to these options take effect the next time you start a new message (not if you already started a message).",
+    "description": "Description for the section titleAddAccents explaining how the insertaccention works.",
+    "placeholders": {
+      "br": {
+        "content": "$1",
+        "example": "<br>"
+      }
+    }
+  },
+  "optionTriggerChar": {
+    "message": "Trigger character",
+    "description": "Character used to trigger accent insertion."
+  },
+  "optionTriggerCharDescr": {
+    "message": "Character used to trigger accent insertion.",
+    "description": "This is an option shown in the add-on settings. It describes the optionTriggerChar setting.",
+    "placeholders": {
+      "code_number": {
+        "content": "$1",
+        "example": "<code>1234.25</code>"
+      }
+    }
+  },
+  "optioncharMap": {
+    "message": "Comma separated mapping of character to accented character. Example: e:é, w:è",
+    "description": "Comma separated mapping of character to accented character. Example: e:é, w:è"
+  },
+  "optioncharMapDescr": {
+    "message": "Character Mapping.",
+    "description": "This is an option shown in the add-on settings. It describes the optioncharMap setting.",
+    "placeholders": {
+      "code_number": {
+        "content": "$1",
+        "example": "<code>1234.25</code>"
+      }
+    }
+  },
+
+  
+  "optionMenuUnicodeFont": {
+    "message": "Show Unicode font options",
+    "description": "This is an option shown in the add-on settings."
+  },
+  "optionMenuUnicodeFontDescr": {
+    "message": "For example, ˢᵘᵖᵉʳˢᶜʳⁱᵖᵗ, ꜱᴍᴀʟʟ ᴄᴀᴘꜱ, 𝒮𝒸𝓇𝒾𝓅𝓉, 𝔉𝔯𝔞𝔨𝔱𝔲𝔯, 🅒🅘🅡🅒🅛🅔🅓 and 🆂🆀🆄🅰🆁🅴🅳.",
+    "description": "This is an option shown in the add-on settings. It describes the optionMenuUnicodeFont setting. IMPORTANT: You may choose any (number of) examples here that look good in your language."
+  },
+  "optionMenuCasing": {
+    "message": "Show case changing options",
+    "description": "This is an option shown in the add-on settings."
+  },
+  "optionMenuCasingDescr": {
+    "message": "For example, “UPPER CASE”, “lower case”, “Capitalize Each Word” or “tOGGLE cASE”.",
+    "description": "This is an option shown in the add-on settings. It describes the optionMenuCasing setting."
+  },
+
+  "subtitleEntryPreview": {
+    "message": "Preview",
+    "description": "The heading/grouping title shown for options customizing the design of the context menu entry."
+  },
+  "optionMenuShowReadableText": {
+    "message": "Show a readable description of the transformation",
+    "description": "This is an option shown in the add-on settings."
+  },
+  "optionMenuShowReadableTextDescr": {
+    "message": "In addition to the examples of the transformation, this also shows the name of transformation as text.",
+    "description": "This is an option shown in the add-on settings. It describes the optionMenuCasing setting."
+  },
+  "optionMenuShowLivePreview": {
+    "message": "Show a live preview with the selected text",
+    "description": "This is an option shown in the add-on settings."
+  },
+  "optionMenuShowLivePreviewDescr": {
+    "message": "Shows the effect of the transformation on the selected text instead of an example one.",
+    "description": "This is an option shown in the add-on settings. It describes the optionMenuCasing setting."
+  },
+
+  // option footer
+  // ARIA labels/descriptions
+  "dismissIconDescription": {
+    "message": "Close this message",
+    "description": "the aria label for the close button of the message box"
+  },
+  "ariaMessageLoading": {
+    "message": "loading message",
+    "description": "the aria label to label the message box as an info message box"
+  },
+  "ariaMessageInfo": {
+    "message": "info message",
+    "description": "the aria label to label the message box as an info message box"
+  },
+  "ariaMessageSuccess": {
+    "message": "success message",
+    "description": "the aria label to label the message box as an success message box"
+  },
+  "ariaMessageError": {
+    "message": "error message",
+    "description": "the aria label to label the message box as an error message box"
+  },
+  "ariaMessageWarning": {
+    "message": "warning message",
+    "description": "the aria label to label the message box as an warning message box"
+  }
+}
