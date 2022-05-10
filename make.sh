@@ -12,5 +12,5 @@ EXTENSION_NAME="addAccents"
 # create zip
 cd src || exit
 rm "../$EXTENSION_NAME.xpi"
-zip -r -FS "../$EXTENSION_NAME.xpi" .
+zip -r -FS "../$EXTENSION_NAME.xpi" . -x "*/.DS_Store" -x ".idea/*"
 cd ..
