@@ -13,9 +13,8 @@
  */
 const defaultSettings = {
     insertaccent: {
-        insertaccentUnicodeFracts: true,
         triggerChar: "\\",
-        charMap: 'e:é, w:è, r:ê, a:à, s:â, c:ç, o:ô, u:ù, y:û, i:î, k:ï, n:ñ',
+        charMap: 'e:é:è:ê:ë:e,a:à:â:a,c:ç,o:ô:œ:o,u:ù:û:u,i:î:ï:i,$:€,d:°',
     },
     unicodeFont: {
         changeFont: true,

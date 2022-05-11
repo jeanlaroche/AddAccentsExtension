@@ -3,7 +3,7 @@
 const INSERTACCENT_CONTENT = "insertaccentContent";
 
 let triggerChar = "\\";
-let charMap = {"e":"é", "w":"è", "r":"ê", "a":"à", "s":"â", "c":"ç", "o":"ô", "u":"ù", "y":"û", "i":"î", "k":"ï", "n":"ñ"};
+let charMap = {};
 
 /**
  * Get caret position.
@@ -176,12 +176,16 @@ function handleResponse(message, sender) {
     triggerChar = message.triggerChar;
 //    console.log("Trigger char " + triggerChar);
 //    console.log("charMap " + message.charMap);
+    // Create the chacter mapping associative array from the string.
     const allPairs = message.charMap.split(",");
     charMap = new Map();
     for (var pair of allPairs)
     {
-        pair=pair.split(':')
-        charMap[pair[0].trim()] = pair[1].trim()
+        var pairs=pair.split(':')
+        for(var i=0;i<pairs.length-1;i++)
+        {
+            charMap[pairs[i].trim()]=pairs[i+1].trim();
+        }
     }
     console.log(charMap)
 }
