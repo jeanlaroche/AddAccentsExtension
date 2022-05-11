@@ -210,7 +210,7 @@
     "description": "A title in the add-on settings."
   },
   "optionHelperTextInsertaccention": {
-    "message": "Here's where you configure accent insertion. Select the trigger character, and the mapping. If your trigger character is \\ and the mapping has e:é, typing e followed by \\ will insert é. Change to these options take effect the next time you start a new message (not if you already started a message).",
+    "message": "Here's where you configure accent insertion. Select the trigger character, and the mapping. If your trigger character is \\ and the mapping has e:é:è, typing e followed by \\ will insert é. Typing \\ again will insert è. Change to these options take effect the next time you start a new message (not if you already started a message).",
     "description": "Description for the section titleAddAccents explaining how the insertaccention works.",
     "placeholders": {
       "br": {
