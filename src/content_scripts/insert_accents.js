@@ -23,7 +23,8 @@ function getCaretPosition(target) {
         const temp = document.createTextNode("\0");
         range.insertNode(temp);
         const caretposition = target.innerText.indexOf("\0");
-        temp.parentNode.removeChild(temp);
+        // Removing this as it causes thunderbird to insert two \n
+        //temp.parentNode.removeChild(temp);
         return caretposition;
     }
     // input and textarea fields
