@@ -6,12 +6,12 @@ let triggerChar = "\\";
 let charMap = {};
 
 /**
- * Get caret position.
+ * Get character left of caret.
  *
  * @param {Object} target
  * @returns {number}
  */
-function getCaretPosition(target) {
+function getCaretChar(target) {
     // ContentEditable elements
     if (target.isContentEditable || document.designMode === "on") {
         target.focus();
@@ -19,19 +19,23 @@ function getCaretPosition(target) {
         if (!_range.collapsed) {
             return null;
         }
-        const range = _range.cloneRange();
-        const temp = document.createTextNode("\0");
-        range.insertNode(temp);
-        const caretposition = target.innerText.indexOf("\0");
-        temp.parentNode.removeChild(temp);
-        return caretposition;
+        var sel = document.getSelection()
+        var offset = sel.anchorOffset;
+        var text = sel.anchorNode.wholeText
+        if(!text) return null;
+        console.debug("getSelection.anchorOffset:  ", offset, text, text[offset-1]);
+        return text[offset-1];
     }
     // input and textarea fields
     else {
         if (target.selectionStart !== target.selectionEnd) {
             return null;
         }
-        return target.selectionStart;
+//        console.debug("TARGET:",target);
+//        console.debug("TARGET VALUE:",target.value);
+//        console.debug("target.selectionStart:",target.selectionStart);
+//
+        return target.value[target.selectionStart-1];
     }
 }
 
@@ -147,9 +151,7 @@ function insertAccent(event) {
         return;
     }
     const target = event.target;
-    const caretposition = getCaretPosition(target);
-    const value = target.value || target.innerText;
-    let previousChar = value.slice(caretposition-1, caretposition);
+    let previousChar = getCaretChar(target);
     let doReplace = (event.data == triggerChar && previousChar in charMap);
     if (doReplace) {
         event.preventDefault();

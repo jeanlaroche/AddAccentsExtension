@@ -1,8 +1,8 @@
-# AddAccents – Extension to add accents
+# AddAccents – Firefox/Thunderbird extension to add accents
 
 I used the excellent extension https://github.com/rugk/unicodify to help me get started with this as I don't know much about building extensions for firefox and thunderbird
 
-This extension works a bit like abctajpu used to work: it allows you to type "e" followed by "\\" to insert "é" .
+This Firefox/Thunderbird extension works a bit like abctajpu used to work: it allows you to type "e" followed by "\\" to insert "é" .
 
 ## SETTINGS
 ### Trigger character:
