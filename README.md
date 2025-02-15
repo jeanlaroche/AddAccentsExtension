@@ -20,6 +20,8 @@ The default is `e:é:è:ê:ë:e,a:à:â:a,c:ç,o:ô:œ:o,u:ù:û:u,i:î:ï:i,$:�
 The mapping is a comma separated list of original_character:replacement_character(s). 
 
 Note that `e:  something else   ` is perfectly valid but the leading and trailing spaces in the replacement characters will be removed. 
+You can use ":" and "," in your replacement string, provided you escape them.  
+For example `e:this\,then\:that` is valid, and the replacement string will be "this,then:that"
 
 If you press the trigger character after a character that is not in the mapping, you get the trigger character. 
 For example, typing "A\\" will leave A unchanged and place \\ next to it.

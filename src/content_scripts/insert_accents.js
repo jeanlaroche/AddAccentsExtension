@@ -179,17 +179,21 @@ function handleResponse(message, sender) {
 //    console.log("Trigger char " + triggerChar);
 //    console.log("charMap " + message.charMap);
     // Create the chacter mapping associative array from the string.
-    const allPairs = message.charMap.split(",");
+    // Regexp with look-back to only split on , and not on \,
+    const allPairs = message.charMap.split(/(?<!\\),/);
+    //console.debug(allPairs);
     charMap = new Map();
     for (var pair of allPairs)
     {
-        var pairs=pair.split(':')
+        // Same thing here, lookback to allow using \: in the replacement.
+        var pairs=pair.split(/(?<!\\):/)
         for(var i=0;i<pairs.length-1;i++)
         {
-            charMap[pairs[i].trim()]=pairs[i+1].trim();
+            charMap[pairs[i].trim()]=pairs[i+1].trim().replace(/\\,/g, ',').replace(/\\:/g, ':');
         }
     }
-    console.log(charMap)
+//    console.log("This is the char map");
+//    console.log(charMap);
 }
 
 /**
