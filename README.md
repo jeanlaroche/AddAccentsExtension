@@ -29,7 +29,7 @@ For example, typing "A\\" will leave A unchanged and place \\ next to it.
 * Here's a French mapping:\
 `e:é:è:ê:ë:e,a:à:â:a,c:ç,o:ô:œ:o,u:ù:û:u,i:î:ï:i,$:€,d:°` 
 * Here's a mapping one could use for typing in Spanish: \
-`a:á,o:ó,u:ú:ü,i:í,n:ñ,?:¿,!:¡,$:€,d:°`
+`e:é,a:á,o:ó,u:ú:ü,i:í,n:ñ,?:¿,!:¡,$:€,d:°`
 * And one for German:\
 `a:ä,o:ö,u:ü,s:ß,$:€,d:°`
 * And one for Romanian:\
