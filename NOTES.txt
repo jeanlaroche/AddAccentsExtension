@@ -1,0 +1,9 @@
+To debug without signing the extension:
+open about:debugging in firefox (as an URL). Click this firefox, and load temporary add-on.
+Build it before you load it and load addAccents.xpi
+Reload appears to work fine in firefox.
+Go to any web page, and refresh it to reload the add-on.
+
+In thunderbird: Tools/addons and themes, click the gear icon then debug add-on.
+Submit here:
+https://addons.thunderbird.net/en-US/developers/
