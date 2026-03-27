@@ -40,13 +40,15 @@ For example, typing "A\\" will leave A unchanged and place \\ next to it.
 `A:Á,a:á,C:Č,c:č,D:Ď,d:ď,E:É,e:é,É:Ě,é:ě,I:Í,i:í,N:Ň,n:ň,O:Ó,o:ó,R:Ř,r:ř,S:Š,s:š,T:Ť,t:ť,U:Ú,u:ú,Ú:Ů,ú:ů,Y:Ý,y:ý,Z:Ž,z:ž,$:€`
 
 ### Other usage:
-You can use the mapping to quickly enter a telephone number you use all the time:\
-`7:714 647 8181` \
-Or an address: \
-`4:45 Rue de la Roquette` \
-You can also include line breaks in the replacement by using `\n`. For example:\
-`a:123 Main St\nSpringfield, IL 62701`\
-will expand "a" to a two-line address. Note that line breaks only take effect in multi-line fields (textarea, rich text editors); single-line inputs will ignore them.
+Keys can be more than one character, which makes the extension useful for expanding abbreviations and snippets. For example:\
+`PH:714 647 8181,AD:45 Rue de la Roquette`\
+will expand `PH\` to your phone number and `AD\` to your address.
+
+You can also include line breaks in the replacement by using `\n`. Combined with multi-character keys this makes it easy to expand a short abbreviation into a full multi-line address:\
+`AD:45 Rue de la Roquette\nParis 75011`\
+Note that line breaks only take effect in multi-line fields (textarea, rich text editors); single-line inputs will ignore them.
+
+When multiple keys could match (e.g. both `A` and `AD` are mapped), the longest match wins.
 
 ## To build:
 From the src directory
@@ -59,4 +61,4 @@ Or simply, `make.sh`
 ## Version history:
 * 0.1 Initial version
 * 0.2 Add support for simpler mapping: `e:é:è:e` is now equivalent to `e:é,é:è,è:e`.
-* 0.3 Support `\n` in replacement strings for multi-line expansions. Fix for React/framework-controlled inputs and login pages. Automatic uppercase pairing (e.g. `e:é` also maps `E:É`).
+* 0.3 Support `\n` in replacement strings for multi-line expansions. Fix for React/framework-controlled inputs and login pages. Automatic uppercase pairing (e.g. `e:é` also maps `E:É`). Multi-character keys for abbreviation expansion (e.g. `AD:45 Rue de la Roquette`).

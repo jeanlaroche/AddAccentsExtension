@@ -7,3 +7,10 @@
 .float-image {
   margin: 10px;
 }
+
+#charMap {
+  width: 100%;
+  font-family: monospace;
+  font-size: 0.9em;
+  resize: vertical;
+}

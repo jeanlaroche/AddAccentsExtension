@@ -4,27 +4,26 @@ const INSERTACCENT_CONTENT = "insertaccentContent";
 
 let triggerChar = "\\";
 let charMap = {};
+let maxKeyLen = 1;
 
 /**
- * Get character left of caret.
+ * Get the string of up to n characters immediately left of the caret.
  *
  * @param {Object} target
- * @returns {number}
+ * @param {number} n - maximum number of characters to return
+ * @returns {string|null} - string of up to n chars, or null if selection is non-collapsed
  */
-function getCaretChar(target) {
+function getCaretString(target, n) {
     // ContentEditable elements
     if (target.isContentEditable || document.designMode === "on") {
         target.focus();
         const _range = document.getSelection().getRangeAt(0);
-        if (!_range.collapsed) {
-            return null;
-        }
-        var sel = document.getSelection()
-        var offset = sel.anchorOffset;
-        var text = sel.anchorNode.wholeText
-        if(!text) return null;
-        console.debug("getSelection.anchorOffset:  ", offset, text, text[offset-1]);
-        return text[offset-1];
+        if (!_range.collapsed) return null;
+        const sel = document.getSelection();
+        const offset = sel.anchorOffset;
+        const text = sel.anchorNode.wholeText;
+        if (!text) return null;
+        return text.substring(Math.max(0, offset - n), offset);
     }
     // input and textarea fields
     else {
@@ -34,7 +33,7 @@ function getCaretChar(target) {
         if (target.selectionStart !== null && target.selectionStart !== target.selectionEnd) {
             return null;
         }
-        return target.value[pos - 1];
+        return target.value.substring(Math.max(0, pos - n), pos);
     }
 }
 
@@ -193,20 +192,32 @@ function insertAccent(event) {
     if (!(event.inputType === "insertText" || event.inputType === "insertCompositionText" || event.inputType === "insertParagraph" || event.inputType === "insertLineBreak")) {
         return;
     }
+    if (event.data !== triggerChar) return;
+
     const target = event.target;
-    let previousChar = getCaretChar(target);
-    let doReplace = (event.data == triggerChar && previousChar in charMap);
-//    console.log('addaccent check:', {data: event.data, triggerChar, previousChar, inMap: previousChar in charMap, doReplace, value: target.value, selStart: target.selectionStart});
-    if (doReplace) {
+    const lookback = getCaretString(target, maxKeyLen);
+    if (lookback === null) return;
+
+    // Try longest key first so e.g. "AD" takes priority over "A" if both are mapped.
+    let matchedKey = null;
+    for (let len = maxKeyLen; len >= 1; len--) {
+        const candidate = lookback.substring(lookback.length - len);
+        if (candidate in charMap) {
+            matchedKey = candidate;
+            break;
+        }
+    }
+
+    if (matchedKey !== null) {
         event.preventDefault();
-        const insert = charMap[previousChar];
+        const insert = charMap[matchedKey];
         if (!target.isContentEditable && document.designMode !== "on") {
-            replaceInInputField(target, previousChar, insert);
+            replaceInInputField(target, matchedKey, insert);
         } else {
-            deleteCaret(target, previousChar);
+            deleteCaret(target, matchedKey);
             insertAtCaret(target, insert);
         }
-        console.debug("Insertaccent: replaced '%s' with '%s'.", previousChar, insert);
+        console.debug("Insertaccent: replaced '%s' with '%s'.", matchedKey, insert);
     }
 }
 
@@ -248,6 +259,8 @@ function handleResponse(message, sender) {
             charMap[upperKey] = charMap[key].toUpperCase();
         }
     }
+    // Track the longest key so insertAccent knows how far back to look.
+    maxKeyLen = Math.max(1, ...Object.keys(charMap).map(k => k.length));
 //    console.log("This is the char map");
 //    console.log(charMap);
 }
