@@ -28,14 +28,13 @@ function getCaretChar(target) {
     }
     // input and textarea fields
     else {
-        if (target.selectionStart !== target.selectionEnd) {
+        // selectionStart is null for input types that don't support selection (e.g. email)
+        // in that case assume caret is at end of value
+        const pos = target.selectionStart !== null ? target.selectionStart : target.value.length;
+        if (target.selectionStart !== null && target.selectionStart !== target.selectionEnd) {
             return null;
         }
-//        console.debug("TARGET:",target);
-//        console.debug("TARGET VALUE:",target.value);
-//        console.debug("target.selectionStart:",target.selectionStart);
-//
-        return target.value[target.selectionStart-1];
+        return target.value[pos - 1];
     }
 }
 
@@ -108,6 +107,50 @@ function countChars(str) {
 }
 
 /**
+ * Replace a character at caret in an input or textarea element.
+ * Handles React/framework-controlled inputs by falling back to the native
+ * prototype value setter when execCommand reports success but makes no change.
+ *
+ * @param {Object} target - input or textarea element
+ * @param {string} charToDelete - the character immediately left of the caret to remove
+ * @param {string} textToInsert - the replacement string
+ * @returns {void}
+ */
+function replaceInInputField(target, charToDelete, textToInsert) {
+    // selectionStart is null for input types that don't support selection (e.g. email)
+    const start = target.selectionStart !== null ? target.selectionStart : target.value.length;
+    const deleteLen = charToDelete.length;
+
+    const valueBefore = target.value;
+
+    // Only use execCommand when we can set the selection to include the char to delete.
+    // For inputs where selectionStart is null (e.g. type="email"), skip straight to native setter.
+    if (target.selectionStart !== null) {
+        target.selectionStart = start - deleteLen;
+        target.selectionEnd = start;
+        if (document.execCommand("insertText", false, textToInsert) && target.value !== valueBefore) {
+            return;
+        }
+    }
+
+    // Fallback: use the native prototype setter so that React/Vue/Angular
+    // controlled inputs actually register the change.
+    const proto = (target instanceof HTMLTextAreaElement)
+        ? HTMLTextAreaElement.prototype
+        : HTMLInputElement.prototype;
+    const nativeSetter = Object.getOwnPropertyDescriptor(proto, "value").set;
+
+    const newValue = valueBefore.slice(0, start - deleteLen) + textToInsert + valueBefore.slice(start);
+    nativeSetter.call(target, newValue);
+    if (target.selectionStart !== null) {
+        target.selectionStart = target.selectionEnd = start - deleteLen + textToInsert.length;
+    }
+
+    // Dispatch a real InputEvent (not UIEvent) so framework state syncs correctly.
+    target.dispatchEvent(new InputEvent("input", { bubbles: true, inputType: "insertText", data: textToInsert }));
+}
+
+/**
  * Delete at caret.
  *
  * @param {Object} target
@@ -153,12 +196,17 @@ function insertAccent(event) {
     const target = event.target;
     let previousChar = getCaretChar(target);
     let doReplace = (event.data == triggerChar && previousChar in charMap);
+//    console.log('addaccent check:', {data: event.data, triggerChar, previousChar, inMap: previousChar in charMap, doReplace, value: target.value, selStart: target.selectionStart});
     if (doReplace) {
         event.preventDefault();
-        deleteCaret(target, previousChar);
-        let insert = charMap[previousChar];
-        insertAtCaret(target, insert);
-        console.debug("Insertaccent: “%s” was replaced with “%s”.", previousChar, insert);
+        const insert = charMap[previousChar];
+        if (!target.isContentEditable && document.designMode !== "on") {
+            replaceInInputField(target, previousChar, insert);
+        } else {
+            deleteCaret(target, previousChar);
+            insertAtCaret(target, insert);
+        }
+        console.debug("Insertaccent: replaced '%s' with '%s'.", previousChar, insert);
     }
 }
 
@@ -203,10 +251,15 @@ function handleResponse(message, sender) {
  * @returns {void}
  */
 function handleError(error) {
-    console.error(`Error: ${error}`);
+    console.warn(`Addaccent: background not ready, retrying in 1s (${error})`);
+    setTimeout(() => {
+        browser.runtime.sendMessage({ "type": INSERTACCENT_CONTENT }).then(handleResponse, (err) => {
+            console.error(`Addaccent: failed to get settings: ${err}`);
+        });
+    }, 1000);
 }
 
 browser.runtime.sendMessage({ "type": INSERTACCENT_CONTENT }).then(handleResponse, handleError);
 browser.runtime.onMessage.addListener(handleResponse);
-window.addEventListener("beforeinput", insertAccent, true);
+document.addEventListener("beforeinput", insertAccent, true);
 console.log("Addaccent module loaded.");
