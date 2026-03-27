@@ -19,9 +19,11 @@ The default is `e:é:è:ê:ë:e,a:à:â:a,c:ç,o:ô:œ:o,u:ù:û:u,i:î:ï:i,$:�
 
 The mapping is a comma separated list of original_character:replacement_character(s). 
 
-Note that `e:  something else   ` is perfectly valid but the leading and trailing spaces in the replacement characters will be removed. 
-You can use ":" and "," in your replacement string, provided you escape them.  
+Note that `e:  something else   ` is perfectly valid but the leading and trailing spaces in the replacement characters will be removed.
+You can use ":" and "," in your replacement string, provided you escape them.
 For example `e:this\,then\:that` is valid, and the replacement string will be "this,then:that"
+
+**Automatic uppercase pairing:** if you map a lowercase letter, the uppercase version is automatically mapped too. For example, `e:é` will also make `E` expand to `É`. You can always override this by explicitly adding an uppercase mapping.
 
 If you press the trigger character after a character that is not in the mapping, you get the trigger character. 
 For example, typing "A\\" will leave A unchanged and place \\ next to it.
@@ -42,7 +44,9 @@ You can use the mapping to quickly enter a telephone number you use all the time
 `7:714 647 8181` \
 Or an address: \
 `4:45 Rue de la Roquette` \
-Note that at this time, the replacement character(s) cannot include a comma or a line return.
+You can also include line breaks in the replacement by using `\n`. For example:\
+`a:123 Main St\nSpringfield, IL 62701`\
+will expand "a" to a two-line address. Note that line breaks only take effect in multi-line fields (textarea, rich text editors); single-line inputs will ignore them.
 
 ## To build:
 From the src directory
@@ -55,3 +59,4 @@ Or simply, `make.sh`
 ## Version history:
 * 0.1 Initial version
 * 0.2 Add support for simpler mapping: `e:é:è:e` is now equivalent to `e:é,é:è,è:e`.
+* 0.3 Support `\n` in replacement strings for multi-line expansions. Fix for React/framework-controlled inputs and login pages. Automatic uppercase pairing (e.g. `e:é` also maps `E:É`).

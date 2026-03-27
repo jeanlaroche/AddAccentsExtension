@@ -237,7 +237,15 @@ function handleResponse(message, sender) {
         var pairs=pair.split(/(?<!\\):/)
         for(var i=0;i<pairs.length-1;i++)
         {
-            charMap[pairs[i].trim()]=pairs[i+1].trim().replace(/\\,/g, ',').replace(/\\:/g, ':');
+            charMap[pairs[i].trim()]=pairs[i+1].trim().replace(/\\,/g, ',').replace(/\\:/g, ':').replace(/\\n/g, '\n');
+        }
+    }
+    // Auto-pair uppercase: if 'e' -> 'é' is mapped and 'E' is not explicitly mapped,
+    // automatically add 'E' -> 'É'.
+    for (const key of Object.keys(charMap)) {
+        const upperKey = key.toUpperCase();
+        if (upperKey !== key && !(upperKey in charMap)) {
+            charMap[upperKey] = charMap[key].toUpperCase();
         }
     }
 //    console.log("This is the char map");
